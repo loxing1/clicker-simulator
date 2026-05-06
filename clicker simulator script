@@ -1,0 +1,438 @@
+
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local player = Players.LocalPlayer
+
+
+local Window = Rayfield:CreateWindow({
+	Name = "zerocaution on telegram",
+	LoadingTitle = "larping",
+	LoadingSubtitle = "by zerocaution"
+})
+
+
+local MainTab = Window:CreateTab("Main", 4483362458)
+local FreeSeasonTab = Window:CreateTab("Free Rewards", 4483362458)
+local WorldTab = Window:CreateTab("World", 4483362458)
+local SpinTab = Window:CreateTab("Spin", 4483362458)
+local UpgradeTab = Window:CreateTab("Upgrades", 4483362458)
+
+local autoClick = false
+local loopThread
+
+
+
+MainTab:CreateToggle({
+	Name = "Auto Clicker",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoClick = Value
+
+		if autoClick and not loopThread then
+			loopThread = task.spawn(function()
+				while autoClick do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Click")
+						:FireServer()
+
+					task.wait(0.05)
+				end
+				loopThread = nil
+			end)
+		end
+	end
+})
+
+MainTab:CreateToggle({
+	Name = "Equip Best",
+	CurrentValue = false,
+	Callback = function(Value)
+		if Value then
+			ReplicatedStorage
+				:WaitForChild("Game")
+				:WaitForChild("Events")
+				:WaitForChild("PetAction")
+				:FireServer()
+		end
+	end
+})
+
+
+
+
+for i = 1, 10 do
+	FreeSeasonTab:CreateButton({
+		Name = "Claim Tier " .. i,
+		Callback = function()
+			ReplicatedStorage
+				:WaitForChild("Game")
+				:WaitForChild("Events")
+				:WaitForChild("Season")
+				:FireServer("Claim", "Free", i)
+		end
+	})
+end
+
+WorldTab:CreateButton({
+	Name = "Spawn",
+	Callback = function()
+
+		local worldRemote = game:GetService("ReplicatedStorage")
+			:WaitForChild("Game")
+			:WaitForChild("Events")
+			:WaitForChild("Worlds")
+
+		local args = {
+			"Teleport",
+			"Spawn"
+		}
+
+		worldRemote:FireServer(unpack(args))
+	end
+})
+
+
+WorldTab:CreateButton({
+	Name = "Desert",
+	Callback = function()
+
+		local worldRemote = game:GetService("ReplicatedStorage")
+			:WaitForChild("Game")
+			:WaitForChild("Events")
+			:WaitForChild("Worlds")
+
+		local args = {
+			"Teleport",
+			"Desert"
+		}
+
+		worldRemote:FireServer(unpack(args))
+	end
+})
+
+WorldTab:CreateButton({
+	Name = "Farm",
+	Callback = function()
+
+		local worldRemote = game:GetService("ReplicatedStorage")
+			:WaitForChild("Game")
+			:WaitForChild("Events")
+			:WaitForChild("Worlds")
+
+		local args = {
+			"Teleport",
+			"Farm"
+		}
+
+		worldRemote:FireServer(unpack(args))
+	end
+})
+
+WorldTab:CreateButton({
+	Name = "Jungle",
+	Callback = function()
+
+		local worldRemote = game:GetService("ReplicatedStorage")
+			:WaitForChild("Game")
+			:WaitForChild("Events")
+			:WaitForChild("Worlds")
+
+		local args = {
+			"Teleport",
+			"Jungle"
+		}
+
+		worldRemote:FireServer(unpack(args))
+	end
+})
+
+WorldTab:CreateButton({
+	Name = "Aqua",
+	Callback = function()
+
+		local worldRemote = game:GetService("ReplicatedStorage")
+			:WaitForChild("Game")
+			:WaitForChild("Events")
+			:WaitForChild("Worlds")
+
+		local args = {
+			"Teleport",
+			"Aqua"
+		}
+
+		worldRemote:FireServer(unpack(args))
+	end
+})
+
+WorldTab:CreateButton({
+	Name = "Samurai",
+	Callback = function()
+
+		local worldRemote = game:GetService("ReplicatedStorage")
+			:WaitForChild("Game")
+			:WaitForChild("Events")
+			:WaitForChild("Worlds")
+
+		local args = {
+			"Teleport",
+			"Samurai"
+		}
+
+		worldRemote:FireServer(unpack(args))
+	end
+})
+
+SpinTab:CreateButton({
+	Name = "Spin Wheel",
+	Callback = function()
+
+		local spinRemote = game:GetService("ReplicatedStorage")
+			:WaitForChild("Game")
+			:WaitForChild("Events")
+			:WaitForChild("Spin")
+
+		local args = {
+			"SpinWheel"
+		}
+
+		spinRemote:FireServer(unpack(args))
+	end
+})
+
+SpinTab:CreateButton({
+	Name = "Spin All",
+	Callback = function()
+
+		local spinRemote = game:GetService("ReplicatedStorage")
+			:WaitForChild("Game")
+			:WaitForChild("Events")
+			:WaitForChild("Spin")
+
+		for i = 1, 50 do
+			local args = {
+				"SpinWheel"
+			}
+
+			spinRemote:FireServer(unpack(args))
+			task.wait(0.01)
+		end
+	end
+})
+
+local autoClicks = false
+local autoGems = false
+local autoRebirths = false
+local autoLuck = false
+local autoWalkSpeed = false
+local autoPetStorage = false
+local autoEquipLimit = false
+local autoCriticalClickChance = false
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade Clicks",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("MoreClicks")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
+
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade Gems",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("MoreGems")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
+
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade Rebirths",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("RebirthButtons")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
+
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade Clicks",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("MoreClicks")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade Critical Click Chance",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("CriticalClickChance")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade Luck",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("MoreLuck")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
+
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade WalkSpeed",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("WalkSpeed")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade Pet Storage",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("PetStorage")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
+
+UpgradeTab:CreateToggle({
+	Name = "Auto Upgrade Equip Limit",
+	CurrentValue = false,
+	Callback = function(Value)
+		autoUpgrade = Value
+
+		if autoUpgrade then
+			task.spawn(function()
+				while autoUpgrade do
+					ReplicatedStorage
+						:WaitForChild("Game")
+						:WaitForChild("Events")
+						:WaitForChild("Upgrades")
+						:FireServer("PetEquip")
+
+					task.wait(0.1)
+				end
+			end)
+		end
+	end
+})
