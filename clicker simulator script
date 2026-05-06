@@ -1,4 +1,4 @@
-
+--Clicker Simulator --
 local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
 local Players = game:GetService("Players")
@@ -49,21 +49,6 @@ MainTab:CreateToggle({
 		end
 	end
 })
-
-MainTab:CreateToggle({
-	Name = "Equip Best",
-	CurrentValue = false,
-	Callback = function(Value)
-		if Value then
-			ReplicatedStorage
-				:WaitForChild("Game")
-				:WaitForChild("Events")
-				:WaitForChild("PetAction")
-				:FireServer()
-		end
-	end
-})
-
 
 
 
@@ -436,3 +421,6 @@ UpgradeTab:CreateToggle({
 		end
 	end
 })
+
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/loxing1/clicker-simulator/refs/heads/main/clicker%20simulator%20script"))()--
+-- load string is there--
